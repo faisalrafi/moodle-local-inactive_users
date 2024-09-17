@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Settings page for local_book_seat.
+ * Settings page for local_inactive_users.
  *
  * @package    local_inactive_users
  * @copyright  2024 Brain Station 23 Ltd.
@@ -27,6 +27,6 @@ global $CFG;
 if ($hassiteconfig) {
     $ADMIN->add('localplugins',
         new admin_externalpage('local_inactive_users',get_string('pluginname','local_inactive_users'),
-            $CFG->wwwroot.'/local/local_inactive_users/view.php'));
+            $CFG->wwwroot.'/local/inactive_users/view.php'));
 
 }

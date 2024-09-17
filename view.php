@@ -22,9 +22,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require('../../config.php');
+global $USER, $PAGE, $OUTPUT, $CFG;
 
-global $USER, $PAGE;
+require('../../config.php');
+require_once($CFG->dirroot.'/local/inactive_users/lib.php');
 
 if(!is_siteadmin($USER)) {
     return redirect(new moodle_url('/'), 'Unauthorized', null, \core\output\notification::NOTIFY_ERROR);
@@ -33,6 +34,32 @@ if(!is_siteadmin($USER)) {
 $PAGE->set_url('/local/inactive_users/view.php');
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title(get_string('pagetitle', 'local_inactive_users'));
-$PAGE->set_heading(get_string('pagetitle', 'local_inactive_users'));
+$PAGE->set_heading(get_string('pageheading', 'local_inactive_users'));
 
-var_dump('hello'); die();
+$page = optional_param('page', 1, PARAM_INT);
+$perpage = optional_param('perpage', 2, PARAM_INT);
+
+echo $OUTPUT->header();
+if ($page < 1) {
+    $page = 1;
+}
+$suspend = get_string('suspend', 'local_inactive_users');
+$delete = get_string('delete', 'local_inactive_users');
+
+$inactive_users = inactive_users_get_inactive_users($page, $perpage);
+
+$total_users = inactive_users_count();
+
+$baseurl = new moodle_url('/local/inactive_users/view.php', ['page' => $page, 'perpage' => $perpage]);
+
+$templatecontext = [
+    'inactive_users' => array_values($inactive_users),
+    'feature_url' => new moodle_url('/local/inactive_users/delete.php'),
+    'suspend' => $suspend,
+    'delete' => $delete,
+];
+
+echo $OUTPUT->render_from_template('local_inactive_users/view', $templatecontext);
+echo $OUTPUT->paging_bar($total_users, $page, $perpage, $baseurl);
+
+echo $OUTPUT->footer();

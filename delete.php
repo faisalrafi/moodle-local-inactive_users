@@ -15,15 +15,30 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language file for local_inactive_users.
+ * Delete file for local_inactive_users.
  *
  * @package    local_inactive_users
  * @copyright  2024 Brain Station 23 Ltd.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Inactive Users';
-$string['pagetitle'] = 'Inactive Users';
-$string['pageheading'] = 'Inactive Users in Last 5 Years';
-$string['suspend'] = 'Suspend';
-$string['delete'] = 'Delete';
+global $DB;
+
+require_once(__DIR__ . '/../../config.php');
+require_login();
+
+$userid = optional_param('userid', 0, PARAM_INT);
+$action = optional_param('action', 0, PARAM_INT);
+
+if ($action == 1) {
+    // Suspend the user.
+    $updateObject = new stdClass();
+    $updateObject->id = $userid;
+    $updateObject->suspended = 1;
+    $DB->update_record('user', $updateObject);
+    redirect(new moodle_url('/local/inactive_users/view.php'), 'User Suspended', null, \core\output\notification::NOTIFY_SUCCESS);
+} else {
+    // Delete the user.
+    $DB->delete_records('user', ['id' => $userid]);
+    redirect(new moodle_url('/local/inactive_users/view.php'), 'User Deleted', null, \core\output\notification::NOTIFY_SUCCESS);
+}
