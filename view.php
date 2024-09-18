@@ -36,13 +36,10 @@ $PAGE->set_context(\context_system::instance());
 $PAGE->set_title(get_string('pagetitle', 'local_inactive_users'));
 $PAGE->set_heading(get_string('pageheading', 'local_inactive_users'));
 
-$page = optional_param('page', 1, PARAM_INT);
-$perpage = optional_param('perpage', 2, PARAM_INT);
+$page = optional_param('page', 0, PARAM_INT);
+$perpage = optional_param('perpage', 50, PARAM_INT);
 
 echo $OUTPUT->header();
-if ($page < 1) {
-    $page = 1;
-}
 $suspend = get_string('suspend', 'local_inactive_users');
 $delete = get_string('delete', 'local_inactive_users');
 
@@ -55,6 +52,7 @@ $baseurl = new moodle_url('/local/inactive_users/view.php', ['page' => $page, 'p
 $templatecontext = [
     'inactive_users' => array_values($inactive_users),
     'feature_url' => new moodle_url('/local/inactive_users/delete.php'),
+    'suspend_url' => new moodle_url('/local/inactive_users/suspend_users.php'),
     'suspend' => $suspend,
     'delete' => $delete,
 ];

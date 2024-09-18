@@ -22,20 +22,35 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Retrieve inactive users from the database based on pagination parameters.
+ *
+ * @param int $page The page number for pagination.
+ * @param int $perpage The number of results per page.
+ * @return array The array of inactive users.
+ * @throws dml_exception
+ */
 function inactive_users_get_inactive_users($page, $perpage) {
     global $DB;
-    $offset = ($page - 1) * $perpage;
+    $offset = $page * $perpage;
 
     $sql = "SELECT * 
-                FROM {user} 
+            FROM {user} 
               WHERE (lastlogin < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 5 YEAR))  OR lastlogin IS NULL)
               AND id != 1
-              LIMIT $perpage OFFSET " . $offset;
+              AND suspended = 0
+            LIMIT $perpage OFFSET " . $offset;
 
     $result = $DB->get_records_sql($sql);
     return $result;
 }
 
+/**
+ * Count the number of inactive users.
+ *
+ * @return int The count of inactive users.
+ * @throws dml_exception
+ */
 function inactive_users_count() {
     global $DB;
 
