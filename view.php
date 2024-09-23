@@ -35,6 +35,7 @@ $PAGE->set_url('/local/inactive_users/view.php');
 $PAGE->set_context(\context_system::instance());
 $PAGE->set_title(get_string('pagetitle', 'local_inactive_users'));
 $PAGE->set_heading(get_string('pageheading', 'local_inactive_users'));
+$PAGE->requires->css(new moodle_url('/local/inactive_users/local_inactive_users_style.css'));
 
 $page = optional_param('page', 0, PARAM_INT);
 $perpage = optional_param('perpage', 50, PARAM_INT);
@@ -58,6 +59,8 @@ $templatecontext = [
 ];
 
 echo $OUTPUT->render_from_template('local_inactive_users/view', $templatecontext);
+$PAGE->requires->js_call_amd('local_inactive_users/tablefilter', 'init');
+
 echo $OUTPUT->paging_bar($total_users, $page, $perpage, $baseurl);
 
 echo $OUTPUT->footer();

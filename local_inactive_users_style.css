@@ -1,0 +1,20 @@
+#inactive_users-myInput {
+    background-image: url('https://fonts.gstatic.com/s/i/materialicons/search/v6/24px.svg');
+    background-color: #f0f4f8;
+    background-clip: padding-box;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 25%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#inactive_users-myInput:focus {
+    background-color: #e0f7fa;
+    outline: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}

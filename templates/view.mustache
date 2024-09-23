@@ -29,9 +29,17 @@
     </a>
 </div>
 
-<table class="table table-hover">
+<input type="text" id="inactive_users-myInput" placeholder="Search Users..">
+
+<button id="suspendSelected" class="btn btn-warning ml-5">Suspend Selected Users</button>
+<button id="deleteSelected" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteSelected">Delete Selected Users</button>
+
+<table id="myTable" class="table table-hover">
     <thead>
     <tr>
+        <th scope="col">
+            <input type="checkbox" id="checkAll" onclick="toggleCheckAll(this)">
+        </th>
         <th scope="col">{{#str}} firstname, local_inactive_users {{/str}}</th>
         <th scope="col">{{#str}} lastname, local_inactive_users {{/str}}</th>
         <th scope="col">{{#str}} email, local_inactive_users {{/str}}</th>
@@ -42,6 +50,9 @@
     <tbody>
     {{#inactive_users}}
         <tr>
+            <td>
+                <input type="checkbox" class="user-checkbox" data-userid="{{id}}">
+            </td>
             <td>{{firstname}}</td>
             <td>{{lastname}}</td>
             <td>{{email}}</td>
@@ -78,3 +89,23 @@
     {{/inactive_users}}
     </tbody>
 </table>
+
+<div class="modal fade" id="confirmDeleteSelected" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteLabel">{{#str}} confirmdelete, local_inactive_users {{/str}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{#str}} suredeleteuser, local_inactive_users {{/str}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{#str}} cancel, local_inactive_users {{/str}}</button>
+                <button id="confirmDeleteSelectedButton" class="btn btn-danger">{{#str}} delete, local_inactive_users {{/str}}</button>
+            </div>
+        </div>
+    </div>
+</div>
