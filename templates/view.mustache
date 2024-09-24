@@ -31,8 +31,8 @@
 
 <input type="text" id="inactive_users-myInput" placeholder="Search Users..">
 
-<button id="suspendSelected" class="btn btn-warning ml-5">Suspend Selected Users</button>
-<button id="deleteSelected" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteSelected">Delete Selected Users</button>
+<button id="suspendSelected" class="btn btn-warning ml-5">{{#str}} suspendselected, local_inactive_users {{/str}}</button>
+<button id="deleteSelected" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteSelected">{{#str}} deleteselected, local_inactive_users {{/str}}</button>
 
 <table id="myTable" class="table table-hover">
     <thead>
@@ -43,6 +43,7 @@
         <th scope="col">{{#str}} firstname, local_inactive_users {{/str}}</th>
         <th scope="col">{{#str}} lastname, local_inactive_users {{/str}}</th>
         <th scope="col">{{#str}} email, local_inactive_users {{/str}}</th>
+        <th scope="col">{{#str}} lastlogin, local_inactive_users {{/str}}</th>
         <th scope="col">{{#str}} suspend, local_inactive_users {{/str}}</th>
         <th scope="col">{{#str}} delete, local_inactive_users {{/str}}</th>
     </tr>
@@ -56,6 +57,7 @@
             <td>{{firstname}}</td>
             <td>{{lastname}}</td>
             <td>{{email}}</td>
+            <td>{{lastlogin}}</td>
             <td>
                 <a href="{{feature_url}}?userid={{id}}&action=1" class="btn btn-warning">
                     {{suspend}}

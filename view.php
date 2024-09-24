@@ -46,6 +46,14 @@ $delete = get_string('delete', 'local_inactive_users');
 
 $inactive_users = inactive_users_get_inactive_users($page, $perpage);
 
+foreach ($inactive_users as $user) {
+    if ($user->lastlogin) {
+        $user->lastlogin = date('Y-m-d', $user->lastlogin);
+    } else {
+        $user->lastlogin = 'Never logged in';
+    }
+}
+
 $total_users = inactive_users_count();
 
 $baseurl = new moodle_url('/local/inactive_users/view.php', ['page' => $page, 'perpage' => $perpage]);

@@ -39,6 +39,7 @@ function inactive_users_get_inactive_users($page, $perpage) {
               WHERE (lastlogin < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 5 YEAR))  OR lastlogin IS NULL)
               AND id != 1
               AND suspended = 0
+            ORDER BY lastlogin DESC  
             LIMIT $perpage OFFSET " . $offset;
 
     $result = $DB->get_records_sql($sql);
