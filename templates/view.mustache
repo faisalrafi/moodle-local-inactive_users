@@ -34,6 +34,21 @@
 <button id="suspendSelected" class="btn btn-warning ml-5">{{#str}} suspendselected, local_inactive_users {{/str}}</button>
 <button id="deleteSelected" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteSelected">{{#str}} deleteselected, local_inactive_users {{/str}}</button>
 
+<!--<div class="form-group w-25">-->
+<!--    <select id="yearFilter" class="form-control">-->
+<!--        <option value="">Select Year To Filter..</option>-->
+<!--        <option value="2011">2011</option>-->
+<!--        <option value="2012">2012</option>-->
+<!--        <option value="2013">2013</option>-->
+<!--        <option value="2014">2014</option>-->
+<!--        <option value="2015">2015</option>-->
+<!--        <option value="2016">2016</option>-->
+<!--        <option value="2017">2017</option>-->
+<!--        <option value="2018">2018</option>-->
+<!--        <option value="2019">2019</option>-->
+<!--    </select>-->
+<!--</div>-->
+
 <table id="myTable" class="table table-hover">
     <thead>
     <tr>
@@ -111,3 +126,23 @@
         </div>
     </div>
 </div>
+
+<!--<script>-->
+<!--    document.getElementById('yearFilter').addEventListener('change', function() {-->
+<!--        var selectedYear = this.value;-->
+<!--        var rows = document.querySelectorAll('#myTable tbody tr');-->
+
+<!--        rows.forEach(function(row) {-->
+<!--            var lastLogin = row.querySelector('td:nth-child(5)').textContent.trim();-->
+<!--            if (lastLogin) {-->
+<!--                var lastLoginYear = new Date(lastLogin).getFullYear();-->
+
+<!--                if (selectedYear === "" || lastLoginYear <= selectedYear) {-->
+<!--                    row.style.display = '';-->
+<!--                } else {-->
+<!--                    row.style.display = 'none';-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->

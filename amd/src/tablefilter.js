@@ -15,8 +15,10 @@ define(['jquery'], function($) {
                         var firstname = $(this).find('td').eq(1).text().toUpperCase();
                         var lastname = $(this).find('td').eq(2).text().toUpperCase();
                         var email = $(this).find('td').eq(3).text().toUpperCase();
+                        var lastlogin = $(this).find('td').eq(4).text().toUpperCase();
 
-                        if (firstname.indexOf(filter) > -1 || lastname.indexOf(filter) > -1 || email.indexOf(filter) > -1) {
+                        // eslint-disable-next-line max-len
+                        if (firstname.indexOf(filter) > -1 || lastname.indexOf(filter) > -1 || email.indexOf(filter) > -1 || lastlogin.indexOf(filter) > -1) {
                             $(this).show();
                         }
                     }
